@@ -63,5 +63,13 @@ The policy is trained with the standard VLA objective, and inference is unchange
 If you find FrameSkip useful, please cite:
 
 ```bibtex
-TODO
+@misc{frameskip,
+      title={FrameSkip: Learning from Fewer but More Informative Frames in VLA Training}, 
+      author={Bin Yu and Shijie Lian and Xiaopeng Lin and Zhaolong Shen and Yuliang Wei and Changti Wu and Hang Yuan and Haishan Liu and Bailing Wang and Cong Huang and Kai Chen},
+      year={2026},
+      eprint={2605.13757},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2605.13757}, 
+}
 ```

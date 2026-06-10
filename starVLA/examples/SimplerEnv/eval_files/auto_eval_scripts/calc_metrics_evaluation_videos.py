@@ -995,7 +995,7 @@ CKPT_MAPPING = {
 
 parser = argparse.ArgumentParser()
 model_path = (
-    "/path/to/starVLA/results/Checkpoints/1_need/QwenGR00T/videos/steps_30000_pytorch_model.pt"
+    "/mnt/petrelfs/yejinhui/Projects/llavavla/results/Checkpoints/1_need/QwenGR00T/videos/steps_30000_pytorch_model.pt"
 )
 
 # Get the file name

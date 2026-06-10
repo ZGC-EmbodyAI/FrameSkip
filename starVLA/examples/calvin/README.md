@@ -2,7 +2,7 @@
 
 This document describes how to **train and evaluate StarVLA models on the Calvin benchmark**, including dataset preparation, training configuration, and evaluation procedures.
 
-> **Note:** Calvin benchmark experiments were conducted by the UNT team. For inquiries, please contact Zhijie Song ([contact omitted]) or Feng Yan ([contact omitted]).
+> **Note:** Calvin benchmark experiments were conducted by the UNT team. For inquiries, please contact Zhijie Song (1600013008@pku.edu.cn) or Feng Yan (bphengyan@163.com).
 
 
 ---

@@ -431,7 +431,7 @@ if __name__ == "__main__":
     cfg.framework.qwenvl.base_vlm = "./playground/Pretrained_models/Qwen3-VL-4B-Instruct"
 
     model = Qwen_PI_v3(cfg)
-    # ckpt="/path/to/starVLA/results/Checkpoints/1011_qwenpi/checkpoints/need_steps_10000_pytorch_model.pt"
+    # ckpt="/mnt/petrelfs/yejinhui/Projects/llavavla/results/Checkpoints/1011_qwenpi/checkpoints/need_steps_10000_pytorch_model.pt"
     # model = Qwen_PI.from_pretrained(ckpt)
     print(model)
 

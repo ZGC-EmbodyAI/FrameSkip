@@ -9,7 +9,7 @@ exists). Safe to re-run.
 Usage::
 
     python examples/RoboChallenge_table30v2/train_files/download_table30v2.py \\
-        --raw-root /path/to/RoboChallenge_table30v2/raw
+        --raw-root /project/vonneumann1/jye624/Datasets/RoboChallenge_table30v2/raw
 
 Logs go to ``tmp/logs/download_table30v2.log`` when wrapped by
 ``download_table30v2.sh``.

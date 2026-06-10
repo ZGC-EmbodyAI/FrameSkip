@@ -5,8 +5,8 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=128
 #SBATCH --gres=gpu:8
-#SBATCH --output=/path/to/logs/%x-%j.out
-#SBATCH --error=/path/to/logs/%x-%j.err
+#SBATCH --output=/mnt/petrelfs/gaoning/trash/%x-%j.out
+#SBATCH --error=/mnt/petrelfs/gaoning/trash/%x-%j.err
 #SBATCH --exclude=HOST-10-140-66-29
 
 set -e
@@ -45,7 +45,7 @@ output_dir=${run_root_dir}/${run_id}
 mkdir -p "${output_dir}"
 cp "$0" "${output_dir}/"
 
-source /path/to/miniconda3/bin/activate
+source /mnt/petrelfs/gaoning/miniconda3/bin/activate
 conda activate starvla
 
 # -------------------- Key: launch accelerate once per node --------------------

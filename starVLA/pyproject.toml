@@ -5,7 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "starVLA"
 authors = [
-    {name = "starVLA Community"},
+    {name = "Jinhui Ye", email="jinhuiyes@gmail.com"},
+    {name = "Fangjing Wang", email="fangjing_wang@outlook.com"},
+    {name = "Junqiu Yu", email="michaelyu1101@163.com"},
+
 ]
 description = "StarVLA: A Lego-like Codebase for Vision-Language-Action Model Developing ."
 version = "1.0.1"

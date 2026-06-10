@@ -79,7 +79,7 @@ bash schedule_widowx_eval.sh
 ```bash
 # 单实验目录
 bash summarize_widowx_one.sh \
-  /path/to/starVLA/results/Checkpoints/0427_oxe_bridge_rt_1_QwenPI_v3
+  /mnt/petrelfs/yejinhui/Projects/starVLA/results/Checkpoints/0427_oxe_bridge_rt_1_QwenPI_v3
 
 # 或者改 summarize_widowx_all.sh 顶部的 DIR_GLOB 后批量跑
 DIR_GLOB='0427_oxe_bridge_rt_1_QwenPI_v3' bash summarize_widowx_all.sh
@@ -96,7 +96,7 @@ DIR_GLOB='0427_oxe_bridge_rt_1_QwenPI_v3' bash summarize_widowx_all.sh
 
 | 变量 | 默认值 | 说明 |
 | --- | --- | --- |
-| `ROOT_BASE` | `/path/to/starVLA/results/Checkpoints` | 实验根目录 |
+| `ROOT_BASE` | `/mnt/petrelfs/yejinhui/Projects/starVLA/results/Checkpoints` | 实验根目录 |
 | `DIR_GLOB` | `0427_oxe_bridge_rt_1_QwenPI_v3` | 实验子目录的 glob（也可作为第一个位置参数） |
 | `SLURM_PARTITION` | `si` | srun 的分区 |
 | `SLURM_GRES` | `gpu:4` | srun 的资源 |

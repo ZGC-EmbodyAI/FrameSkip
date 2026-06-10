@@ -225,7 +225,7 @@ def evaluate_policy_ddp(
 
     # val_annotations = OmegaConf.load(conf_dir / "annotations/new_playtable_validation.yaml")
     if diverse_inst:
-        with open("/path/to/lang_annotation_cache.json", "r") as f:
+        with open("/mnt/bn/robotics/lxh/robot-flamingo/lang_annotation_cache.json", "r") as f:
             val_annotations = json.load(f)
     else:
         val_annotations = OmegaConf.load(conf_dir / "annotations/new_playtable_validation.yaml")

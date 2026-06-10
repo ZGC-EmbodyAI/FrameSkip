@@ -4,12 +4,12 @@ echo `which python`
 
 
 ############# Environment setup #############
-cd "${STARVLA_DIR:-/path/to/starVLA}"
-export star_vla_python=${star_vla_python:-python}
-export sim_python=${sim_python:-python}
-export SimplerEnv_PATH=${SimplerEnv_PATH:-/path/to/SimplerEnv}
+cd /home/jye624/Projcets/starVLA
+export star_vla_python=/home/jye624/.conda/envs/starVLA/bin/python
+export sim_python=/home/jye624/.conda/envs/simpler_env/bin/python
+export SimplerEnv_PATH=/project/vonneumann1/jye624/Projcets/SimplerEnv
 export PYTHONPATH=$(pwd):${PYTHONPATH}
-export LD_LIBRARY_PATH=${SIMPLER_ENV_LIB:-/path/to/simpler_env/lib}:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=/home/jye624/.conda/envs/simpler_env/lib:${LD_LIBRARY_PATH}
 port=6678 
 gpu_id=0
 

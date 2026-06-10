@@ -10,7 +10,7 @@ export PYTHONPATH=$(pwd):${PYTHONPATH}
 # === Please modify the following paths according to your environment ===
 export starVLA_python=python   # or: /path/to/conda/envs/starVLA/bin/python
 
-your_ckpt=/path/to/checkpoint.pt
+your_ckpt=/mnt/file2/jiachen/pr/starVLA/playground/test/qwen2.5-libero/checkpoints/steps_30000_pytorch_model.pt
 gpu_id=7
 port=1009${gpu_id}
 ###########################################################################################

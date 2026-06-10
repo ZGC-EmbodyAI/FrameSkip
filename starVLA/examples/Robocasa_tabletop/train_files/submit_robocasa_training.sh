@@ -5,11 +5,11 @@
 #SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=128          # number of cores per tasks
 #SBATCH --gres=gpu:8                 # number of gpus
-#SBATCH --output=/path/to/starVLA/results/logs/%x-%j.out           # output file name
-#SBATCH --error=/path/to/starVLA/results/logs/%x-%j.err
+#SBATCH --output=/mnt/petrelfs/yejinhui/Projects/starVLA/results/logs/%x-%j.out           # output file name
+#SBATCH --error=/mnt/petrelfs/yejinhui/Projects/starVLA/results/logs/%x-%j.err
 #SBATCH --exclude=SH-IDCA1404-10-140-54-13
 
-#  6955707                 si     RoCaPI       reserved user           normal  R        9:14      4     gpu:32 SH-IDCA1404-10-140-54-[13,88-89,107]
+#  6955707                 si     RoCaPI       reserved yejinhui       normal  R        9:14      4     gpu:32 SH-IDCA1404-10-140-54-[13,88-89,107]   
 
 # source ~/.bashrc     # Ensure conda command is available
 # source ~/.zshrc
@@ -33,7 +33,7 @@ export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASTER_PORT=$((RANDOM % 101 + 20000))
 
 
-cd /path/to/starVLA
+cd /mnt/petrelfs/yejinhui/Projects/starVLA
 export PYTHONPATH="$PWD/starVLA/model/openvla:$PYTHONPATH"
 
 # conda activate llavavla310
@@ -101,3 +101,4 @@ srun --jobid $SLURM_JOBID bash -c 'accelerate launch \
   --wandb_project StarVLA_Robocasa \
   --wandb_entity jinhuiye \
   --trainer.is_resume True '
+

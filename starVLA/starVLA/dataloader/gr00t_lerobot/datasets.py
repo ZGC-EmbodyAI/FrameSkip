@@ -116,7 +116,7 @@ def calculate_dataset_statistics(parquet_paths: list[Path]) -> dict:
 
 def _normalize_action_mode(mode: str) -> str:
     """Normalize action mode names to {abs, delta, rel}.""" 
-    # TODO: Move this out of the dataloader so action-mode logic lives in transforms or a separate utility.
+    # @gaoning plz move this, we want dataloader to be independent of the action mode logic, we can move this to transform or a separate utils tool to handle lerobot dataset
     mode = str(mode).lower()
     if mode in {"absolute", "raw"}:
         mode = "abs"

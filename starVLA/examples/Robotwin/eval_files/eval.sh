@@ -9,7 +9,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
-ROBOTWIN_PATH="${ROBOTWIN_PATH:-/path/to/RoboTwin}"
+ROBOTWIN_PATH="${ROBOTWIN_PATH:-/mnt/data/gaoning/code_repos/RoboTwin}"
 if [[ ! -d "${ROBOTWIN_PATH}" ]]; then
     echo "ROBOTWIN_PATH does not exist: ${ROBOTWIN_PATH}" >&2
     exit 1

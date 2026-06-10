@@ -4,21 +4,21 @@
 echo "Using Python: $(which python)"
 
 # Set necessary environment variables
-export star_vla_python=/data/wzx/conda_env/starVLA/bin/python
-export sim_python=/data/wzx/behavior/bin/python
-export BEHAVIOR_PATH=/data/wzx/behavior_evaluation/behavior/Datasets/BEHAVIOR_challenge
+export star_vla_python=python
+export sim_python=python
+export BEHAVIOR_PATH=/path/to/BEHAVIOR_challenge
 export PYTHONPATH=$(pwd):${PYTHONPATH}
 
 # Configure model path and port
-MODEL_PATH="/data/wzx/behavior_evaluation/behavior/playground/Pretrained_models/Qwen3-VL-GR00T-Behavior-nostate/checkpoints/steps_20000_pytorch_model.pt"
+MODEL_PATH="/path/to/checkpoint.pt"
 PORT=10197
 WRAPPERS="DefaultWrapper"
 USE_STATE=False  # Whether to use state as part of the observation
 
 # Configure task name
 TASK_NAME="turning_on_radio"  # Choose a simple task
-LOG_FILE="/data/wzx/behavior_evaluation/behavior/playground/Pretrained_models/Qwen3-VL-GR00T-Behavior-nostate/checkpoints/client_logs/log_${TASK_NAME}.txt"
-SERVER_LOG_FILE="/data/wzx/behavior_evaluation/behavior/playground/Pretrained_models/Qwen3-VL-GR00T-Behavior-nostate/checkpoints/server_logs/log_${TASK_NAME}.txt"
+LOG_FILE="/path/to/client_logs/log_${TASK_NAME}.txt"
+SERVER_LOG_FILE="/path/to/server_logs/log_${TASK_NAME}.txt"
 
 # Start server
 echo "▶️ Starting server on port ${PORT}..."

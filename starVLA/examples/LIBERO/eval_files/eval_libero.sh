@@ -1,6 +1,6 @@
 #!/bin/bash
-# === Paths (adapted for this cluster) ===
-STARVLA_DIR=/home/jye624/Projcets/starVLA
+# === Paths: set these for your local environment ===
+STARVLA_DIR=${STARVLA_DIR:-$(pwd)}
 
 cd ${STARVLA_DIR}
 # === Checkpoint ===
@@ -8,9 +8,9 @@ CKPT=${STARVLA_DIR}/playground/Checkpoints/0405_libero4in1_CosmoPredict2GR00T/ch
 
 ###########################################################################################
 # === Please modify the following paths according to your environment ===
-export LIBERO_HOME=/home/jye624/Projcets/LIBERO
+export LIBERO_HOME=${LIBERO_HOME:-/path/to/LIBERO}
 export LIBERO_CONFIG_PATH=${LIBERO_HOME}/libero
-export LIBERO_Python=/home/jye624/.conda/envs/libero/bin/python
+export LIBERO_Python=${LIBERO_Python:-python}
 
 export PYTHONPATH=$PYTHONPATH:${LIBERO_HOME} # let eval_libero find the LIBERO tools
 export PYTHONPATH=$(pwd):${PYTHONPATH} # let LIBERO find the websocket tools from main repo

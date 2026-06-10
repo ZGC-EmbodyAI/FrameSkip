@@ -37,9 +37,9 @@ same alignment so a learned EE policy can replay the trajectory.
 Usage::
 
     python examples/RoboChallenge_table30v2/train_files/convert_robochallenge_to_lerobot.py \\
-        --raw-root /project/vonneumann1/jye624/Datasets/RoboChallenge_table30v2/raw \\
+        --raw-root /path/to/RoboChallenge_table30v2/raw \\
         --task shred_paper \\
-        --out-root /project/vonneumann1/jye624/Datasets/RoboChallenge_table30v2/lerobot
+        --out-root /path/to/RoboChallenge_table30v2/lerobot
 """
 from __future__ import annotations
 

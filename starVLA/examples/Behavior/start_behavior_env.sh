@@ -4,9 +4,9 @@
 echo "Using Python: $(which python)"
 
 # Set necessary environment variables
-export star_vla_python=/data/wzx/conda_env/starVLA/bin/python
-export sim_python=/data/wzx/behavior/bin/python
-export BEHAVIOR_PATH=/data/wzx/behavior_evaluation/behavior/Datasets/BEHAVIOR_challenge
+export star_vla_python=python
+export sim_python=python
+export BEHAVIOR_PATH=/path/to/BEHAVIOR_challenge
 export PYTHONPATH=$(pwd):${PYTHONPATH}
 
 # Configure model path and port

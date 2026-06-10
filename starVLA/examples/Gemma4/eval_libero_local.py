@@ -11,9 +11,9 @@ camera view per step. Action chunk size = future_action_window_size + 1 = 8.
 Usage:
     unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
     conda activate gemma_vla
-    cd /data/LFT-W02_data/haodong/git_workspace/gemma-vla
+    cd /path/to/gemma-vla
     export PYTHONPATH=$PWD
-    export LIBERO_HOME=/data/LFT-W02_data/junjie/LIBERO
+    export LIBERO_HOME=/path/to/LIBERO
     export LIBERO_CONFIG_PATH=$LIBERO_HOME/libero
     export PYTHONPATH=$PYTHONPATH:$LIBERO_HOME
     export MUJOCO_GL=osmesa     # CPU rendering, leave GPU for the model

@@ -280,7 +280,7 @@ Regardless of whether you use our internal scripts, the final dataset should sat
 If you already have corresponding scripts, you can run them in the following order:
 
 ```bash
-cd /project/vonneumann1/cyx/starVLA_franka/examples/Franka/franka2lerobot
+cd /path/to/starVLA/examples/Franka/franka2lerobot
 
 bash convert.sh
 

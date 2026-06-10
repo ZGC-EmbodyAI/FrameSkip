@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-ROOT_DIR="/mnt/petrelfs/yejinhui/Projects/llavavla/results/Checkpoints/"
+ROOT_DIR="/path/to/starVLA/results/Checkpoints/"
 DIR_GLOB="1013*"          # to match the directory prefix or wildcard: like 0822* or 0822_best*
 FILE_GLOB="*.pt"          # to match the file wildcard: like '*.pt' or 'steps_*_pytorch_model.pt' or '*pytorch_model*.pt'
 

@@ -1,75 +1,142 @@
 # FrameSkip: Learning from Fewer but More Informative Frames in VLA Training
 
-[![GitHub](https://img.shields.io/badge/Code-GitHub-black?logo=github)](https://github.com/ZGC-EmbodyAI/FrameSkip)
-[![Hugging Face](https://img.shields.io/badge/Checkpoints-Hugging%20Face-yellow?logo=huggingface)](https://huggingface.co/collections/VLyb/frameskip)
+This repository is the anonymous code release for the double-blind review of
+**FrameSkip**. FrameSkip is a training-time frame selection framework for
+Vision-Language-Action (VLA) policies. It reduces dense robot demonstration
+trajectories to fewer, more informative supervision frames while keeping the
+policy architecture and inference procedure unchanged.
 
-**FrameSkip** is a training-time frame selection framework for Vision-Language-Action (VLA) models. Instead of treating every frame in a dense robot demonstration trajectory as equally useful supervision, FrameSkip scores trajectory frames with lightweight cues and trains primarily from fewer but more informative frames.
+The implementation is built on top of the starVLA training and evaluation
+stack. The FrameSkip-specific code is located in:
 
-FrameSkip is designed as a data-layer intervention: it changes which frames are exposed during training while leaving the VLA architecture, action head, loss function, and inference procedure unchanged.
+```text
+starVLA/starVLA/frameskip/
+```
 
-## Highlights
+The rest of `starVLA/` is included as the base VLA codebase needed to run the
+training and evaluation pipeline.
 
-- **Frame-level supervision allocation** for VLA training.
-- **Architecture-agnostic dataloader integration** with no change to model inference.
-- **Importance-guided frame retention** using action variation, visual-action coherence, task-progress priors, and gripper-transition preservation.
-- **Released checkpoints** on [Hugging Face](https://huggingface.co/collections/VLyb/frameskip).
+## What FrameSkip Does
+
+FrameSkip changes the data layer rather than the model. For each demonstration
+trajectory, it:
+
+1. computes frame-importance scores from lightweight trajectory cues;
+2. keeps a target ratio of high-importance frames;
+3. remaps dataloader queries to the retained frame indices during training.
+
+At test time, the learned policy is used exactly like the corresponding
+starVLA policy. No inference-time frame selector is required.
+
+## Main Components
+
+- `starVLA/starVLA/frameskip/utils/importance_metrics.py`
+  implements action-variance, visual-action coherence, task-progress, and
+  gripper-aware importance scoring.
+- `starVLA/starVLA/frameskip/utils/frame_pruner.py`
+  converts importance scores into retained frame indices under configurable
+  compression ratios.
+- `starVLA/starVLA/frameskip/utils/cache_manager.py`
+  stores per-trajectory pruning results so repeated training runs do not need
+  to recompute frame scores.
+- `starVLA/starVLA/frameskip/dataloader/frameskip_dataset.py`
+  extends the LeRobot/starVLA datasets with FrameSkip-aware indexing.
+- `starVLA/starVLA/frameskip/training/train_frameskip.py`
+  wraps the standard starVLA trainer with FrameSkip dataloader construction,
+  dynamic compression-ratio sampling, curriculum options, and logging.
+
+## Repository Layout
+
+```text
+.
+├── README.md
+└── starVLA/
+    ├── starVLA/
+    │   ├── frameskip/              # FrameSkip implementation
+    │   ├── dataloader/             # Base starVLA dataloaders
+    │   ├── model/                  # Base VLA model code
+    │   └── training/               # Base training code
+    ├── examples/                   # Training/evaluation examples
+    ├── deployment/                 # Policy server utilities
+    └── docs/                       # Base starVLA documentation
+```
+
+## Basic Usage
+
+Install the included starVLA package in editable mode:
+
+```bash
+cd starVLA
+pip install -e .
+```
+
+Enable FrameSkip from a starVLA training config by adding a `frameskip` block:
+
+```yaml
+frameskip:
+  enabled: true
+  default_compression_ratio: 0.7
+  cache_dir: ./cache/frameskip
+
+  importance:
+    type: gripper_aware
+    alpha: 0.5
+    beta: 0.0
+    gamma: 0.2
+    enable_vac: false
+    gripper_boost: 2.0
+
+  pruning:
+    type: temporal_consistent
+    compression_ratios: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    used_compression_ratios: [0.7, 0.8, 0.9, 1.0]
+    preserve_key_stages: true
+    min_frames_per_trajectory: 5
+    max_gap: 5
+
+  training:
+    dynamic_ratio: true
+    ratio_schedule: uniform
+    warmup_steps: 0
+```
+
+Then launch training with the FrameSkip training entry point:
+
+```bash
+cd starVLA
+accelerate launch starVLA/frameskip/training/train_frameskip.py \
+  --config_file path/to/your_training_config.yaml
+```
+
+The first run creates a FrameSkip cache for the configured datasets and
+compression ratios. Later runs reuse the cache if the scoring/pruning
+configuration is unchanged.
 
 ## Checkpoints
 
-### Download Checkpoints
+For double-blind review, checkpoint links are intentionally omitted from this
+README. If checkpoints are provided as part of the review artifact, place them
+under a local path such as:
 
-Model checkpoints are hosted in the Hugging Face collection:
-
-**[VLyb/frameskip](https://huggingface.co/collections/VLyb/frameskip)**
-
-You can download checkpoints with the Hugging Face CLI:
-
-```bash
-pip install -U "huggingface_hub[cli]"
-huggingface-cli download <checkpoint-repo-name> --local-dir checkpoints/<checkpoint-name>
+```text
+checkpoints/frameskip/
 ```
 
-Replace `<checkpoint-repo-name>` with the checkpoint repository listed in the collection.
+FrameSkip checkpoints follow the standard starVLA checkpoint format and can be
+loaded by the same policy server and evaluation scripts used for starVLA models.
 
-### Load and Use Checkpoints
+## Notes for Reviewers
 
-FrameSkip is built on the [starVLA](https://github.com/starVLA/starVLA) training and evaluation stack. The released checkpoints follow the standard starVLA checkpoint format and can be loaded in the same way as starVLA VLA policies.
-
-For simulation evaluation, please refer to the model loading and evaluation workflow of the QwenGR00T architecture in starVLA, and replace the checkpoint path with the downloaded FrameSkip checkpoint.
-
-## Quick Start
-
-The code and model checkpoints have been released. The current FrameSkip implementation is located under `./starVLA/starVLA/frameskip`. A cleaner and more user-friendly version is being organized; at this stage, **we recommend using AI-assisted code reading to navigate the implementation details.**
-
-> The ./starVLA directory is a full copy of the starVLA project, with additional implementations for FrameSkip-related functionality.
-
-## Method Overview
-
-FrameSkip follows a three-stage pipeline:
-
-1. **Score frames** in each demonstration trajectory with trajectory-level cues.
-2. **Retain high-importance frames** under a target retention ratio.
-3. **Remap dataloader queries** to the retained frame indices during VLA training.
-
-The policy is trained with the standard VLA objective, and inference is unchanged.
-
-## Resources
-
-- Code: [https://github.com/ZGC-EmbodyAI/FrameSkip](https://github.com/ZGC-EmbodyAI/FrameSkip)
-- Checkpoints: [https://huggingface.co/collections/VLyb/frameskip](https://huggingface.co/collections/VLyb/frameskip)
+- FrameSkip is a data-selection method for VLA training; it does not introduce
+  additional inference modules.
+- The default implementation can run with action-only or gripper-aware scoring,
+  which avoids visual encoder overhead.
+- Visual-action coherence scoring is optional and can use a local timm
+  checkpoint when internet access is unavailable.
+- Cache generation is rank-0 only in distributed training; other ranks wait for
+  the cache to appear before loading it.
 
 ## Citation
 
-If you find FrameSkip useful, please cite:
-
-```bibtex
-@misc{frameskip,
-      title={FrameSkip: Learning from Fewer but More Informative Frames in VLA Training}, 
-      author={Bin Yu and Shijie Lian and Xiaopeng Lin and Zhaolong Shen and Yuliang Wei and Changti Wu and Hang Yuan and Haishan Liu and Bailing Wang and Cong Huang and Kai Chen},
-      year={2026},
-      eprint={2605.13757},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2605.13757}, 
-}
-```
+Citation information is omitted during double-blind review and will be added
+after the review period.

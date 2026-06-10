@@ -114,7 +114,7 @@ If you see errors related to state tensor shapes, verify:
 Contact
 
 For questions, issues, or integration help, please contact:
-guoweiyu96@gmail.com
+[contact omitted]
 
 ⸻
 

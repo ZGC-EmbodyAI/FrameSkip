@@ -148,7 +148,7 @@ class LangForce(baseframework):
       - Training-time assertion: extracted language spans in prior/post must match exactly (token-level).
         If mismatch => raise AssertionError with decoded spans.
       - LangForce utilizes Qwen3-VL and extends the vocabulary with specialized tokens that serve as Latent Action Queries.
-        Run the provided example script add_token.py in https://github.com/ZGC-EmbodyAI/LangForce to update the tokenizer with these additional tokens.
+        Run the corresponding tokenizer utility to update the tokenizer with these additional tokens.
     """
 
     def __init__(
